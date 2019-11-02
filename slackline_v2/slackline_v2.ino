@@ -20,8 +20,28 @@ int keyDelay = 50; // a delay in writing to the keyboard to try to prevent a bac
 void setup()
 {
   Serial.begin(9600);
-  Serial.println();
-  Serial.println("BNO080 Read Example");
+//  Serial.println();
+//  Serial.println("BNO080 Read Example");
+
+ //Serial.begin(115200);
+
+  // wait until serial port opens for native USB devices
+  while (! Serial) {
+    delay(1);
+  }
+  
+  Serial.println("Adafruit VL53L0X test");
+  if (!lox.begin()) {
+    Serial.println(F("Failed to boot VL53L0X"));
+    while(1);
+  }
+  // power 
+  Serial.println(F("VL53L0X API Simple Ranging example\n\n")); //
+  //
+  //
+  //
+
+
 
   Wire.begin();
   Keyboard.begin();
@@ -36,11 +56,11 @@ void setup()
   //  Wire.setClockStretchLimit(4000);
   //  //=================================
 
-  if (myIMU.begin() == false)
-  {
-    Serial.println("BNO080 not detected at default I2C address. Check your jumpers and the hookup guide. Freezing...");
-    while (1);
-  }
+//  if (myIMU.begin() == false)
+//  {
+//    Serial.println("BNO080 not detected at default I2C address. Check your jumpers and the hookup guide. Freezing...");
+//    while (1);
+//  }
 
   Wire.setClock(400000); //Increase I2C data rate to 400kHz
 
@@ -56,7 +76,19 @@ void setup()
 
 void loop()
 {
-  
+   VL53L0X_RangingMeasurementData_t measure;
+
+
+   Serial.print("Reading a measurement... ");
+  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+
+  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
+    Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
+  } else {
+    Serial.println(" out of range ");
+  }
+    
+  delay(100);
 
   //turn write status on and off
   //
@@ -97,23 +129,37 @@ void loop()
 
     //keyboard
     if(writeStatus){
-       // Serial.println(writeStatus);
-      Keyboard.print("I");
-      Keyboard.print(quatI, 2);
-      Keyboard.print("N");
+       Serial.println(writeStatus);
+//      Keyboard.print("I");
+//      Keyboard.print(quatI, 2);
+//      Keyboard.print("N");
+//      delay(keyDelay);//for stability
+//      Keyboard.print("J");
+//      Keyboard.print(quatJ, 2);
+//      Keyboard.print("N");
+//      delay(keyDelay);//for stability
+//      Keyboard.print("Q");
+//      Keyboard.print(quatK, 2);
+//      Keyboard.print("N");
+//      delay(keyDelay);//for stability
+      Keyboard.print("D");
+      Keyboard.print(measure.RangeMilliMeter);
       delay(keyDelay);//for stability
-      Keyboard.print("J");
-      Keyboard.print(quatJ, 2);
-      Keyboard.print("N");
-      delay(keyDelay);//for stability
-      Keyboard.print("Q");
-      Keyboard.print(quatK, 2);
-      Keyboard.print("N");
-      delay(keyDelay);//for stability
-      
     }else{
        // Serial.println(writeStatus);
     }
 
   }
+  //keyboard for distance sensor
+if(writeStatus){
+       Serial.println(writeStatus);
+//    
+      Keyboard.print("D");
+      Keyboard.print(measure.RangeMilliMeter);
+      Keyboard.print("N");
+      delay(keyDelay);//for stability
+    }
+
+
+  
 }

@@ -1,5 +1,6 @@
 var menuState = {
   create: function(){
+     game.stage.backgroundColor = backgroundColour;
     // var placeLabel = game.add.text(100,100, "Nano Go!", introStyle);
     //logo = game.add.sprite(173,57, 'logo');
     startSeq = game.add.sprite(102,208, 'startSeq');

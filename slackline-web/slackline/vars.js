@@ -1,5 +1,5 @@
 var gameBuild = "build 0.1"; //
-var testing = false; //  a bool used to switch between testing and production mode
+var testing = true; //  a bool used to switch between testing and production mode
 var hitTheWall =  true; // if true the car will collide with the steps
 console.log("testing = " + testing);
 ///var hexgrid;
@@ -725,12 +725,13 @@ var trackScaleIncrement = 560 / raceLimit; // about the length of the race scale
 
 //////////// SLACKLINE ??????
 
-
-
+var backgroundColour = "#fefefe";
+var street; // a var for out tilesprite
 var toggleA = false;// has a been pressed
 var toggleI = false;
 var toggleJ = false;
 var toggleQ = false;
+var toggleD = false;
 var toggleN = false;
 //
   var toggle0=false; //has 0 been pressed
@@ -751,7 +752,16 @@ var toggleN = false;
   var stringI ="";
   var stringJ ="";
   var stringQ ="";
+  var stringD ="";
   //
   var sensorI=0;
   var sensorJ=0;
   var sensorQ=0;
+  var sensorD=0;
+  //
+  var groupSize = 5;
+  var spread = -5;// how spread out are the others
+  //
+  yellowArray =[];
+  blueArray =[];
+  orangeArray =[];

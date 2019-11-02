@@ -6,11 +6,12 @@
   --reallydullgrey:#191919;
   --crt: #1E271E;
   --greyout:#000100;
+  --circusWhite:#fefefe;
 }
 
 body{
-  background-color: var(--greyout);
-  background-image: url('assets/hexgrid_v3_ghost_v3.png');
+  background-color: var(--circusWhite);
+  /* background-image: url('assets/hexgrid_v3_ghost_v3.png'); */
   background-repeat: repeat;
 }
 canvas {

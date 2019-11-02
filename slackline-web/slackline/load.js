@@ -120,6 +120,18 @@ var loadState = {
   game.load.audio('fall-sfx', 'assets/fall_v1.mp3');
   //
 
+
+
+
+
+
+
+  game.load.spritesheet('bluething','assets2/bluething.png', 150,150)
+  game.load.spritesheet('yellowthing','assets2/yellowthing.png', 150,150)
+  game.load.spritesheet('orangething','assets2/orangething.png', 150,150)
+
+  game.load.image('street', 'assets2/street3.png');
+
   },
   create: function(){
 

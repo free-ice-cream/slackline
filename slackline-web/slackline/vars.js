@@ -1,5 +1,5 @@
 var gameBuild = "build 0.1"; //
-var testing = true; //  a bool used to switch between testing and production mode
+var testing = false; //  a bool used to switch between testing and production mode
 var hitTheWall =  true; // if true the car will collide with the steps
 console.log("testing = " + testing);
 ///var hexgrid;
@@ -765,3 +765,21 @@ var toggleN = false;
   yellowArray =[];
   blueArray =[];
   orangeArray =[];
+  //
+  var avatarType = Math.floor(Math.random() * 3);
+  var avatarArray =["bluething","yellowthing", "orangething"];
+  //
+  var anxietyLevel = 0;
+  var angst;
+  var anxietyStyle = {
+  font: 'bold 120pt Consolas ',
+  fill: 'red',
+  align: 'left',
+  wordWrap: true,
+  wordWrapWidth: 650
+};
+
+var goodSound;
+var badSound;
+var streetRate = -3;
+var thingRate = -4.3;

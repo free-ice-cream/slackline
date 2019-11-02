@@ -4,7 +4,7 @@ var menuState = {
     // var placeLabel = game.add.text(100,100, "Nano Go!", introStyle);
     //logo = game.add.sprite(173,57, 'logo');
     startSeq = game.add.sprite(102,208, 'startSeq');
-    howBut = game.add.sprite(360,288, 'tutbut');
+    // howBut = game.add.sprite(360,288, 'tutbut');
     // audioControl = game.add.sprite(100,100, 'soundcontrol');
 
     startSeq.inputEnabled=true;
@@ -25,8 +25,8 @@ var menuState = {
     var hov1 = startSeq.animations.add('start-hover', [ 1], 1, false);
     var hov0 = startSeq.animations.add('start-no-hover', [ 0], 1, false);
     //
-    var hov2= howBut.animations.add('tut-no-hover', [ 0], 1, false);
-    var hov3 = howBut.animations.add('tut-hover', [ 1], 1, false);
+    // var hov2= howBut.animations.add('tut-no-hover', [ 0], 1, false);
+    // var hov3 = howBut.animations.add('tut-hover', [ 1], 1, false);
 
     var flip = startSeq.animations.add('countdown', [ 2, 3, 4], 1, false);
 
@@ -42,7 +42,7 @@ var menuState = {
 
 // speaker but
 mainTheme = game.add.audio('theme');
-speakerbut = game.add.sprite(game.world.width - 50, 15, 'speakerbut');
+speakerbut = game.add.sprite(game.world.width - 50, -150, 'speakerbut');
 var speakerOn = speakerbut.animations.add('sp-on', [0], 1, false);
 var speakerOff= speakerbut.animations.add('sp-off', [1], 1, false);
 speakerbut.inputEnabled = true;

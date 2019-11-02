@@ -78,8 +78,9 @@ var loadState = {
 
     //SPRITESHEETS
     // game.load.spritesheet('ministartss',ficurl+'assets/mini-start-546-103.png',268,103);
-    game.load.spritesheet('tutbut','assets/howtoplayspritesheet-620-310.png',308,310);
-    game.load.spritesheet('startSeq','assets/startspritesheet_v4.png', 306,310);
+    // game.load.spritesheet('tutbut','assets/howtoplayspritesheet-620-310.png',308,310);
+    // game.load.spritesheet('startSeq','assets/startspritesheet_v4.png', 306,310);
+    game.load.spritesheet('startSeq','assets2/start3.png', 434,144);
     // game.load.spritesheet('restart','assets/restart-spritesheet_v1.png', 200,192);
     // game.load.spritesheet('alarm','assets/alarm-button_v1.png', 201,192);
     // game.load.spritesheet('track1','assets/track2sprite-v2.png', 160,157);
@@ -119,16 +120,16 @@ var loadState = {
   game.load.audio('power-up-blips', 'assets/power-up-blips.mp3');
   game.load.audio('fall-sfx', 'assets/fall_v1.mp3');
   //
+  game.load.audio('bad1', 'audio/bad 1.mp3');
+  game.load.audio('good1', 'audio/happy 1.mp3');
 
 
 
 
 
-
-
-  game.load.spritesheet('bluething','assets2/bluething.png', 150,150)
-  game.load.spritesheet('yellowthing','assets2/yellowthing.png', 150,150)
-  game.load.spritesheet('orangething','assets2/orangething.png', 150,150)
+  game.load.spritesheet('bluething','assets2/bluething3.png', 150,150)
+  game.load.spritesheet('yellowthing','assets2/yellowthing3.png', 150,150)
+  game.load.spritesheet('orangething','assets2/orangething4.png', 150,150)
 
   game.load.image('street', 'assets2/street3.png');
 

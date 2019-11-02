@@ -9,9 +9,9 @@ game.input.keyboard.addCallbacks(this, null, null, keyPress);
 street = game.add.tileSprite(0,0,1920,1080,"street");
 
 
-yellowGroup = game.add.group();
-blueGroup = game.add.group();
-orangeGroup = game.add.group();
+yellowGroup = game.add.physicsGroup();
+blueGroup = game.add.physicsGroup();
+orangeGroup = game.add.physicsGroup();
 
 yellowGroup.enableBody = true;
 blueGroup.enableBody = true;
@@ -25,11 +25,22 @@ for(let i =0; i<=groupSize ; i++){
   yellowArray.push(yt);
   blueArray.push(bt);
   orangeArray.push(ot);
+  //
+
 }
 
-avatar = game.add.sprite(game.world.width/2, game.world.height-150,'bluething');
+avatar = game.add.sprite(game.world.width/2, game.world.height-150,avatarArray[avatarType]);
+avatar.enableBody = true;
+
+
+game.physics.arcade.enable(avatar);
 
 cursors = game.input.keyboard.createCursorKeys();
+//
+angst = this.add.text(  game.world.width -300, 100, anxietyLevel, anxietyStyle );
+//
+goodSound =  game.add.audio("good1");
+badSound =  game.add.audio("bad1");
   },
 
   // ---------------------------------------------------------------------------------------------------------------
@@ -38,9 +49,22 @@ cursors = game.input.keyboard.createCursorKeys();
   // ---------------------------------------------------------------------------------------------------------------
   // ---------------------------------------------------------------------------------------------------------------
   update: function() {
+
+
+
+
     if(!testing){
-      avatar.x = sensorD /2;
+      avatar.x =  game.world.width -(sensorD * 2)  ;
+        // avatar.x =  sensorD * 2  ;
+      //console.log(sensorD);
+
+
     }
+
+
+    game.physics.arcade.overlap(avatar, yellowGroup, yellowCrash, null, this);
+    game.physics.arcade.overlap(avatar, blueGroup, blueCrash, null, this);
+    game.physics.arcade.overlap(avatar, orangeGroup, orangeCrash, null, this);
 
 
     // Move tilesprite position by pressing arrow keys
@@ -83,6 +107,21 @@ cursors = game.input.keyboard.createCursorKeys();
        blueGroup.y -=12;
        orangeGroup.y -=12;
    }
+   //
+
+   //
+   if(!testing){
+     street.tilePosition.y -= streetRate;
+     for(let i =0;i<yellowArray.length; i++){
+       yellowArray[i].y -=thingRate;
+     }
+     for(let i =0;i<blueArray.length; i++){
+       blueArray[i].y -=thingRate;
+     }
+     for(let i =0;i<orangeArray.length; i++){
+       orangeArray[i].y -=thingRate;
+     }
+   }
    this.checkThings();
 
 },
@@ -107,6 +146,9 @@ checkThings: function(){
       orangeArray[i].x = game.world.randomX;
     }
   }
+
+
+angst.setText(anxietyLevel);
 }
   // ---------------------------------------------------------------------------------------------------------------
   // ---------------------------------------------------------------------------------------------------------------
@@ -223,4 +265,59 @@ switch(char) {
 }
 
 
+}
+function blueCrash(a,b){
+console.log("blueCrash");
+  if(avatarType===0){
+    //meh blu on blue
+
+  }else if(avatarType===1){
+    // blue dominant over yellow
+    anxietyLevel +=1;
+    // goodSound.play();
+    badSound.play();
+
+  }else if(avatarType===2){
+    //blue afraid of orange
+    anxietyLevel -=1;
+    goodSound.play();
+    // badSound.play();
+  }
+}
+function yellowCrash(a,b){
+console.log("yellowCrash");
+  if(avatarType===0){
+    //yellow  affraid of blue
+     anxietyLevel -=1;
+
+     goodSound.play();
+  }else if(avatarType===1){
+    //yellow on yellow
+
+  }else if(avatarType===2){
+    // yellow dominant over orange
+    anxietyLevel +=1;
+    // goodSound.play();
+    badSound.play();
+  }
+}
+
+function orangeCrash(a,b){
+console.log("orangeCrash");
+  if(avatarType===0){
+    //orange dominant over blue
+    anxietyLevel +=1;
+    goodSound.play();
+    badSound.play();
+
+  }else if(avatarType===1){
+    //orange afraid of yellow
+    anxietyLevel -=1;
+    goodSound.play();
+
+  }else if(avatarType===2){
+
+    //meh orang eon orane
+
+  }
 }

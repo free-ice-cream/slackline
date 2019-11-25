@@ -1,9 +1,9 @@
 var menuState = {
   create: function(){
-     game.stage.backgroundColor = backgroundColour;
+    game.stage.backgroundColor = backgroundColour;
     // var placeLabel = game.add.text(100,100, "Nano Go!", introStyle);
     //logo = game.add.sprite(173,57, 'logo');
-    startSeq = game.add.sprite(102,208, 'startSeq');
+    startSeq = game.add.sprite(101,208, 'startSeq');
     // howBut = game.add.sprite(360,288, 'tutbut');
     // audioControl = game.add.sprite(100,100, 'soundcontrol');
 
@@ -12,23 +12,14 @@ var menuState = {
     startSeq.events.onInputOver.add(this.starthover,this);
     startSeq.events.onInputOut.add(this.startnohover,this);
     //
-    // audioControl.inputEnabled = true;
-    // audioControl.events.onInputDown.add(this.audioToggle, this);
-    //
-    // howBut.inputEnabled = true;
-    // howBut.events.onInputDown.add(this.howButDown, this);
-    // howBut.events.onInputOver.add(this.howButOver, this);
-    // howBut.events.onInputOut.add(this.howButOut, this);
-    //
 
-    // var hov1 =
     var hov1 = startSeq.animations.add('start-hover', [ 1], 1, false);
     var hov0 = startSeq.animations.add('start-no-hover', [ 0], 1, false);
     //
     // var hov2= howBut.animations.add('tut-no-hover', [ 0], 1, false);
     // var hov3 = howBut.animations.add('tut-hover', [ 1], 1, false);
 
-    var flip = startSeq.animations.add('countdown', [ 2, 3, 4], 1, false);
+    var flip = startSeq.animations.add('countdown', [ 4, 3, 2], 1, false);
 
 
 
@@ -41,17 +32,17 @@ var menuState = {
     //
 
 // speaker but
-mainTheme = game.add.audio('theme');
-speakerbut = game.add.sprite(game.world.width - 50, -150, 'speakerbut');
-var speakerOn = speakerbut.animations.add('sp-on', [0], 1, false);
-var speakerOff= speakerbut.animations.add('sp-off', [1], 1, false);
-speakerbut.inputEnabled = true;
-speakerbut.events.onInputDown.add(this.speakerButContol, this);
-if(audioLive){
-  speakerbut.animations.play('sp-on');
-}else{
-  speakerbut.animations.play('sp-off');
-}
+// mainTheme = game.add.audio('theme');
+// speakerbut = game.add.sprite(game.world.width - 50, -150, 'speakerbut');
+// var speakerOn = speakerbut.animations.add('sp-on', [0], 1, false);
+// var speakerOff= speakerbut.animations.add('sp-off', [1], 1, false);
+// speakerbut.inputEnabled = true;
+// speakerbut.events.onInputDown.add(this.speakerButContol, this);
+// if(audioLive){
+//   speakerbut.animations.play('sp-on');
+// }else{
+//   speakerbut.animations.play('sp-off');
+// }
 //
   flip.onComplete.add(this.start, this);
 
@@ -60,8 +51,8 @@ if(audioLive){
   },
   start: function(){
     console.log('pop- start ');
-    quickSet();
-    game.state.start('play');
+    // quickSet();
+    game.state.start('intro1');
     countDown=false;
   },
   startListening: function(){
@@ -97,28 +88,29 @@ if(audioLive){
         howBut.animations.play('tut-no-hover',true)
 
   },
-  audioToggle:function(){
-
-    audioLive = !audioLive;
-
-  },speakerButContol: function() {
-    if(audioLive){
-      speakerbut.animations.play('sp-off', true);
-      audioLive = false;
-      mainTheme.stop();
-    }else{
-      speakerbut.animations.play('sp-on', true);
-      audioLive = true;
-      mainTheme.loopFull(.5);
-    }
-
-    }
+  // audioToggle:function(){
+  //
+  //   audioLive = !audioLive;
+  //
+  // },
+  // speakerButContol: function() {
+  //   if(audioLive){
+  //     speakerbut.animations.play('sp-off', true);
+  //     audioLive = false;
+  //     mainTheme.stop();
+  //   }else{
+  //     speakerbut.animations.play('sp-on', true);
+  //     audioLive = true;
+  //     mainTheme.loopFull(.5);
+  //   }
+  //
+  //   }
 
 };
 function quickSet(){
   // score = 0;
   // gameTime=gameDuration;
   // homeTime=false;
-  carType=1;
-  trackselection=1;
+  // carType=1;
+  // trackselection=1;
 }

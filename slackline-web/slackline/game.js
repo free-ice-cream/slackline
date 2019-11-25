@@ -5,13 +5,18 @@ game.state.add('load', loadState);
 game.state.add('menu', menuState);
 // game.state.add('tutorial', tutorialState);
 game.state.add('options1', optionsState1);
+//
+game.state.add('intro1', introState1);
+game.state.add('intro2', introState2);
+game.state.add('intro3', introState3);
 // game.state.add('options2', optionsState2);
 // game.state.add('options3', optionsState3);
 // game.state.add('options4', optionsState4);
 // game.state.add('options5', optionsState5);
 game.state.add('play', playState);
-game.state.add('lose', loseState);
-game.state.add('win', winState);
+
+// game.state.add('lose', loseState);
+// game.state.add('win', winState);
 game.state.add('gameover', gameover);
 //
 game.state.start('boot');

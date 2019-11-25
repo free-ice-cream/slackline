@@ -1,5 +1,5 @@
 var gameBuild = "build 0.1"; //
-var testing = false; //  a bool used to switch between testing and production mode
+var testing = true; //  a bool used to switch between testing and production mode
 var hitTheWall =  true; // if true the car will collide with the steps
 console.log("testing = " + testing);
 ///var hexgrid;
@@ -725,7 +725,8 @@ var trackScaleIncrement = 560 / raceLimit; // about the length of the race scale
 
 //////////// SLACKLINE ??????
 
-var backgroundColour = "#fefefe";
+// var backgroundColour = "#fefefe";
+var backgroundColour = "#000000";
 var street; // a var for out tilesprite
 var toggleA = false;// has a been pressed
 var toggleI = false;
@@ -762,11 +763,19 @@ var toggleN = false;
   var groupSize = 5;
   var spread = -5;// how spread out are the others
   //
-  yellowArray =[];
   blueArray =[];
+  yellowArray =[];// an array for the populations
   orangeArray =[];
   //
-  var avatarType = Math.floor(Math.random() * 3);
+  blueSpeeds = [];
+  yellowSpeeds = []; //arrays for the individuals yellowSpeeds
+  orangeSpeeds = [];
+  //
+  blueAnim = [];
+  yellowAnim = [];
+  orangeAnim = [];
+  //
+  var avatarType = Math.floor(Math.random() * 3);// TODO Better random selector
   var avatarArray =["bluething","yellowthing", "orangething"];
   //
   var anxietyLevel = 0;
@@ -780,6 +789,23 @@ var toggleN = false;
 };
 
 var goodSound;
+var goodSoundPlaying = false;
 var badSound;
+var badSoundPlaying = false;
+
 var streetRate = -3;
 var thingRate = -4.3;
+var thingMin = streetRate + 0 // some limits to the random speeds
+var thingMax=  streetRate + -3;
+
+var street1;
+var street2; // bg sprites
+//
+var firstTime = 0;// a pair of counters for theintro screens
+var secondTime = 0;
+var diff = 0;// a var to hold the difference - not stricltu needed
+var screenTime = 5000;// how long each screen is live for
+//
+var leftPave = 350;
+var rightPave = 1400;
+var heartAttack = 500;

@@ -81,6 +81,7 @@ var loadState = {
     // game.load.spritesheet('tutbut','assets/howtoplayspritesheet-620-310.png',308,310);
     // game.load.spritesheet('startSeq','assets/startspritesheet_v4.png', 306,310);
     game.load.spritesheet('startSeq','assets2/start3.png', 434,144);
+
     // game.load.spritesheet('restart','assets/restart-spritesheet_v1.png', 200,192);
     // game.load.spritesheet('alarm','assets/alarm-button_v1.png', 201,192);
     // game.load.spritesheet('track1','assets/track2sprite-v2.png', 160,157);
@@ -132,7 +133,12 @@ var loadState = {
   game.load.spritesheet('orangething','assets2/orangething4.png', 150,150)
 
   game.load.image('street', 'assets2/street3.png');
+  game.load.image('intro1', 'assets2/intro1_v1.jpg');
+  game.load.image('intro2', 'assets2/intro2_v1.jpg');
+  game.load.image('intro3', 'assets2/intro3_v1.jpg');
 
+game.load.image('gameover1', 'assets2/gameover_v1.jpg');
+game.load.image('gameover2', 'assets2/gameover_v1.jpg');
   },
   create: function(){
 

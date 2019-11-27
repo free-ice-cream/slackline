@@ -7,10 +7,11 @@
   --crt: #1E271E;
   --greyout:#000100;
   --circusWhite:#fefefe;
+  --thor-17:#C52B88;
 }
 
 body{
-  background-color: var(--circusWhite);
+  background-color: var(--thor-17);
   /* background-image: url('assets/hexgrid_v3_ghost_v3.png'); */
   background-repeat: repeat;
 }

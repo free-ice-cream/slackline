@@ -81,35 +81,8 @@ var loadState = {
     // game.load.spritesheet('tutbut','assets/howtoplayspritesheet-620-310.png',308,310);
     // game.load.spritesheet('startSeq','assets/startspritesheet_v4.png', 306,310);
     game.load.spritesheet('startSeq','assets2/start3.png', 434,144);
+    game.load.spritesheet('gameoverflash','assets2/gameover_ss_v2.png', 1080,250);
 
-    // game.load.spritesheet('restart','assets/restart-spritesheet_v1.png', 200,192);
-    // game.load.spritesheet('alarm','assets/alarm-button_v1.png', 201,192);
-    // game.load.spritesheet('track1','assets/track2sprite-v2.png', 160,157);
-    // game.load.spritesheet('track2','assets/track1sprite-v2.png', 160,157);
-    // game.load.spritesheet('tracknext','assets/tracknext-v1.png', 122,119);
-    // game.load.spritesheet('optionsback','assets/backbut_v1.png', 122,119);
-    // game.load.spritesheet('meterK','assets/rising-scale.png', 90, 40);
-    // game.load.spritesheet('soundcontrol','assets/sound-control.png', 100,100);
-    // game.load.spritesheet('volback', 'assets/volume-back.png', 100,100);
-    // game.load.spritesheet('volplus','assets/vol-plus.png', 30,30);
-    // game.load.spritesheet('volminus','assets/vol-minus.png', 30,30);
-    // game.load.spritesheet('speakerbut','assets/soundonoff.png', 35,35);
-    //
-
-    // game.load.spritesheet('tiny-toggle','assets/tiny-toggle-2.png', 69,61);
-    // play screen
-
-
-    //
-    // game.load.spritesheet('tubefall', 'assets/tuberacer-fall_v1.png', 300, 180);
-    //paritcle timeout
-    // game.load.spritesheet('matrix', 'assets/sliver_v1.png', 110, 100);
-    // // game.load.spritesheet('atoms', 'assets/blackatoms_v1.png', 9, 9);
-    // game.load.spritesheet('graphene', 'assets/graphene_v5.png', 120, 136);
-    // game.load.spritesheet('silver', 'assets/silver_v3.png', 100, 150);
-    // game.load.spritesheet('half-graphene', 'assets/half-graphene_v5.png', 60, 68);
-    // game.load.spritesheet('half-grapheneL', 'assets/half-graphene_v5-L.png', 60, 68);
-    // game.load.spritesheet('drop-loop', 'assets/drop-loop_v1.png', 229, 118);
   //and some AUDIO
   game.load.audio('rev', 'assets/car-2.mp3');
   game.load.audio('theme', 'assets/maintrack4.mp3');
@@ -132,10 +105,15 @@ var loadState = {
   game.load.spritesheet('yellowthing','assets2/yellowthing3.png', 150,150)
   game.load.spritesheet('orangething','assets2/orangething4.png', 150,150)
 
-  game.load.image('street', 'assets2/street3.png');
+  game.load.image('street', 'assets2/street4.png');
   game.load.image('intro1', 'assets2/intro1_v1.jpg');
   game.load.image('intro2', 'assets2/intro2_v1.jpg');
   game.load.image('intro3', 'assets2/intro3_v1.jpg');
+  //
+  game.load.image('frame', 'assets2/frame_v2.png');
+  game.load.image('ggauge', 'assets2/green_v2.png');
+  game.load.image('ogauge', 'assets2/orange_v2.png');
+  game.load.image('rgauge', 'assets2/red_v2.png');
 
 game.load.image('gameover1', 'assets2/gameover_v1.jpg');
 game.load.image('gameover2', 'assets2/gameover_v1.jpg');

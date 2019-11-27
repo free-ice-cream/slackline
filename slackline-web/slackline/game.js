@@ -1,4 +1,4 @@
-var game = new Phaser.Game(1920, 1024, Phaser.AUTO, 'gameDiv' );
+var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'gameDiv' );
 //{ preload: preload, create: create, update: update }
 game.state.add('boot', bootState);
 game.state.add('load', loadState);

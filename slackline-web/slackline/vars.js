@@ -1,5 +1,5 @@
 var gameBuild = "build 0.1"; //
-var testing = true; //  a bool used to switch between testing and production mode
+var testing = false; //  a bool used to switch between testing and production mode
 var hitTheWall =  true; // if true the car will collide with the steps
 console.log("testing = " + testing);
 ///var hexgrid;
@@ -808,4 +808,9 @@ var screenTime = 5000;// how long each screen is live for
 //
 var leftPave = 350;
 var rightPave = 1400;
-var heartAttack = 500;
+var heartAttack = 100;
+//
+var outerLimit = 3000;
+var innerLimit = 250;
+//
+var sensorOrientation = "left";// set sensorOrientation to left or right to change which sidr the sensor is relative to the screen view

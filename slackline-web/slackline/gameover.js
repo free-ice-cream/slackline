@@ -2,7 +2,10 @@ var gameover = {
   create: function() {
 
     // var topbanner = game.add.sprite(0,0, 'greenheadbg');
-      intro1 = game.add.sprite(0, 0,  "gameover1");
+      // intro1 = game.add.sprite(0, 0,  "gameover1");
+      flash = game.add.sprite((game.world.width/2) - 540, (game.world.height/2)- 125,  "gameoverflash").animations.add('flash', [ 0,1,2], 12, true).play();
+      // flash.animations.add()
+      //animations.add('start-hover', [ 1], 1, false);
     var newEnd = game.add.sprite(0, 0, 'anxEnd');
     restartButt = game.add.sprite(386, 410, 'restart');
     //
@@ -28,7 +31,7 @@ var gameover = {
 
 
 
-
+firstTime = Date.now();
   },
   // ---------------------------------------------------------------------------------------------------------------
   // ---------------------------------------------------------------------------------------------------------------
@@ -38,8 +41,15 @@ var gameover = {
 
 
   update: function() {
+    secondTime = Date.now();
+    diff = secondTime - firstTime;
+    if( diff >= screenTime ){
+      anxietyLevel = 0;
+      game.state.start('intro1');
 
+    }
   },
+
   gameOver: function() {
 
 

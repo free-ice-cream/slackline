@@ -19,7 +19,7 @@ var introState1 = {
 
 }
 function bounce(key){
-  if(key = "G"){
+  if(key === "G"){
     game.state.start('play');
   }
 

@@ -36,16 +36,24 @@ var playState = {
       // yellowAnim.push(yt.animations.add('frown', [ 2], 1, false));
       // yellowAnim.push(yt.animations.add('smile', [ 1], 1, false));
     }
-
     avatar = game.add.sprite(game.world.width / 2, game.world.height - 200, avatarArray[avatarType]);
     avatar.enableBody = true;
-
-
     game.physics.arcade.enable(avatar);
+    //
+    redgauge = game.add.sprite(game.world.width - 150, 500,  "rgauge");
+    orangegauge = game.add.sprite(game.world.width - 150, 500,  "ogauge");
+    greengauge = game.add.sprite(game.world.width - 150, 500,  "ggauge");
+    // redgauge = game.add.sprite(game.world.width - 350, 500,  "rgauge");
+    // orangegauge = game.add.sprite(game.world.width - 250, 500,  "ogauge");
+    // greengauge = game.add.sprite(game.world.width - 150, 500,  "ggauge");
+    redgauge.anchor.y= 1;
+    orangegauge.anchor.y= 1;
+    greengauge.anchor.y= 1;
+    gaugeframe = game.add.sprite(game.world.width - 150, 50,  "frame");
 
     cursors = game.input.keyboard.createCursorKeys();
     //
-    angst = this.add.text(game.world.width - 300, 100, anxietyLevel, anxietyStyle);
+    // angst = this.add.text(game.world.width - 300, 100, anxietyLevel, anxietyStyle);
     //
     goodSound = game.add.audio("good1");
     badSound = game.add.audio("bad1");
@@ -61,7 +69,8 @@ var playState = {
   update: function() {
 
     if (!testing) {
-      avatar.x = game.world.width - (sensorD * 2);
+      // avatar.x = game.world.width - (sensorD * 2);
+      avatar.x = calibratedSensor(game.world.width,sensorD);
       //
       // street.tilePosition.y -= streetRate;
       street1.y -= streetRate;
@@ -161,7 +170,20 @@ var playState = {
     }
 
 
-    angst.setText(anxietyLevel);
+    // angst.setText(anxietyLevel);
+    this.setGauge();
+  },
+  setGauge: function(){
+    let sc = anxietyLevel/100;
+    redgauge.scale.setTo(1,sc);
+    orangegauge.scale.setTo(1,sc);
+    greengauge.scale.setTo(1,sc);
+    //
+    // redgauge.alpha = (0.5 -sc) ;
+    console.log("redgauge.alpha  = ",redgauge.alpha );
+    console.log("sc = ",sc );
+    orangegauge.alpha = (1 -sc ) ;
+    greengauge.alpha = (1 -(sc*1.5)) ;
   }
   // ---------------------------------------------------------------------------------------------------------------
   // ---------------------------------------------------------------------------------------------------------------
@@ -417,6 +439,36 @@ function getRandomInt(min, max) {
 function anxCheck(){
   if(anxietyLevel >= heartAttack){
     game.state.start('gameover');
+  }
+
+}
+function calibratedSensor(screenWidth, sens){
+console.log("calibratedSensor called");
+  //cap the sensor readings
+  if(sens > outerLimit){
+    sens= outerLimit;
+  }
+  if(sens < innerLimit){
+    sens = innerLimit;
+  }
+  //
+  let streetWidth = screenWidth - (leftPave* 2);
+  let swPercent= streetWidth/100; //1920 - 350 - 350 = 1220 / 100 = 12.2
+  let sensorRange = outerLimit-innerLimit;// 3000 - 250 = 2750
+  let sensOnePercent  = sensorRange/100; // 2750 / 100 = 27.5
+  let livePercent = sens/sensOnePercent; // 250 / 27.7 = 9.025   //3000 / 27.5 = 109.09
+  let relativePosition = livePercent * swPercent;//  9.026 * 12.2 = 110.1 // 109.09 *12.2 = 1330.89
+  //
+
+  if(sensorOrientation === "left"){
+    console.log("relativePosition + leftPave = ",relativePosition + leftPave);
+    return relativePosition + leftPave;
+
+  }else if(sensorOrientation === "right"){
+    //this is wrong :)
+    // return screenWidth - rightPave -relativePosition;
+  }else{
+    console.log("what the varuable batman!?");
   }
 
 }

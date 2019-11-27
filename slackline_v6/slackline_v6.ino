@@ -3,20 +3,16 @@
 #include <SparkFun_VL53L1X.h>
 #include <vl53l1_error_codes.h>
 #include <vl53l1x_class.h>
-
-//#include "Adafruit_VL53L0X.h"// swapping this sensor out for the 4m spark fun one
-//
-//Adafruit_VL53L0X lox = Adafruit_VL53L0X();
-
 #include <Keyboard.h>
-
-
-#include <Keyboard.h>
-
 #include <Wire.h>
-//#include "SparkFun_BNO080_Arduino_Library.h"
-//BNO080 myIMU;
+//
+#include "SparkFun_BNO080_Arduino_Library.h"
+BNO080 myIMU;
+
 SFEVL53L1X distanceSensor;
+
+
+#define NUMBER_OF_SENSORS 2
 
 int buttonPin = 7;
 int pinVal = 0;
@@ -35,18 +31,51 @@ int readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
 int total = 0;                  // the running total
 int average = 0;                // the average
+int distance = 0;
 //
-bool started = false;
+float quatI ;
+float quatJ ;
+float quatK ;
+float quatReal;
+float quatRadianAccuracy;
+//
+//bool started = false;
+
+
+
 
 void setup()
 {
   Wire.begin();
   Serial.begin(9600);
+  Wire.setClock(400000); //Increase I2C data rate to 400kHz
 
-  if (distanceSensor.begin() == 0) //Begin returns 0 on a good init
+
+  
+  for (byte x = 0 ; x < NUMBER_OF_SENSORS ; x++)
   {
-    Serial.println("Sensor online!");
+    enableMuxPort(x); //Tell mux to connect to port X
+    if(x==0){
+      // ToF sensor on mux port 0
+      if (distanceSensor.begin() == 0) //Begin returns 0 on a good init
+      {
+        Serial.println("Sensor online!");
+      }
+    }
+    else if(x ==1){
+       //IMU ensor on mux port 1
+       if (myIMU.begin() == false)
+        {
+          Serial.println("BNO080 not detected at default I2C address. Check your jumpers and the hookup guide. Freezing...");
+          while (1);
+        }
+        myIMU.enableRotationVector(50); //Send data update every 50ms
+    
+    }
+ 
+    disableMuxPort(x);
   }
+  
   
   Keyboard.begin();
 
@@ -63,17 +92,43 @@ void setup()
 
 void loop()
 {
-//   VL53L0X_RangingMeasurementData_t measure;
 //SMOOTHING
               // subtract the last reading:
   total = total - readings[readIndex];
-              // read from the sensor:
-  distanceSensor.startRanging(); //Write configuration bytes to initiate measurement
-  int distance = distanceSensor.getDistance(); //Get the result of the measurement from the sensor
-  distanceSensor.stopRanging();
-//  Serial.print( "distance reads ");
-//  Serial.println( distance);
-//
+
+  
+  for (byte x = 0 ; x < NUMBER_OF_SENSORS ; x++)
+  {
+    enableMuxPort(x); //Tell mux to connect to this port, and this port only
+    if(x == 0){
+      // ToF sensor on mux port 0
+       // read from the sensor:
+      distanceSensor.startRanging(); //Write configuration bytes to initiate measurement
+      distance = distanceSensor.getDistance(); //Get the result of the measurement from the sensor
+      distanceSensor.stopRanging();
+
+    }else if (x == 1){
+      //IMU ensor on mux port 1
+      //Look for reports from the IMU
+        if (myIMU.dataAvailable() == true)
+        {
+          quatI = myIMU.getQuatI();
+          quatJ = myIMU.getQuatJ();
+          quatK = myIMU.getQuatK();
+          quatReal = myIMU.getQuatReal();
+          quatRadianAccuracy = myIMU.getQuatRadianAccuracy();
+        }
+      //
+    }
+    
+
+    disableMuxPort(x); //Tell mux to disconnect from this port
+  }
+
+  delay(1); //Wait for next reading
+
+
+   
   readings[readIndex] = distance;
               // add the reading to the total:
   total = total + readings[readIndex];
@@ -107,13 +162,24 @@ void loop()
   average = total / numReadings;
   Serial.print("average = ");
   Serial.println(average);
+Serial.print("I ");
+Serial.println(quatI, 2);
+Serial.print("J ");
+Serial.println(quatJ, 2);
+Serial.print("K ");
+Serial.println(quatK, 2);
+Serial.print("Real ");
+Serial.println(quatReal, 2);
+
+
+ 
 if(writeStatus){
        Serial.println(writeStatus);
-       if(!started){
-        Keyboard.print("G");
-        Keyboard.print("N");
-        started=true;
-       }
+//       if(!started){
+//        Keyboard.print("G");
+//        Keyboard.print("N");
+//        started=true;
+//       }
        
 //    
       Keyboard.print("D");

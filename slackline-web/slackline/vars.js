@@ -814,3 +814,5 @@ var outerLimit = 3000;
 var innerLimit = 250;
 //
 var sensorOrientation = "left";// set sensorOrientation to left or right to change which sidr the sensor is relative to the screen view
+var startLow = -0.02;
+var startHigh = 0.02; // the activation threshold for the game

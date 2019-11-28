@@ -103,7 +103,7 @@ var loadState = {
 
   game.load.spritesheet('bluething','assets2/bluething3.png', 150,150)
   game.load.spritesheet('yellowthing','assets2/yellowthing3.png', 150,150)
-  game.load.spritesheet('orangething','assets2/orangething4.png', 150,150)
+  game.load.spritesheet('orangething','assets2/orangething4.png', 149,150)
 
   game.load.image('street', 'assets2/street4.png');
   game.load.image('intro1', 'assets2/intro1_v1.jpg');

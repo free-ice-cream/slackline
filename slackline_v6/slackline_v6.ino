@@ -39,6 +39,8 @@ float quatK ;
 float quatReal;
 float quatRadianAccuracy;
 //
+// stabilty state
+byte classification;
 //bool started = false;
 
 
@@ -70,7 +72,8 @@ void setup()
           while (1);
         }
         myIMU.enableRotationVector(50); //Send data update every 50ms
-    
+        myIMU.enableStabilityClassifier(50); //Send data update every 50ms
+        myIMU.calibrateGyro();
     }
  
     disableMuxPort(x);
@@ -117,6 +120,11 @@ void loop()
           quatK = myIMU.getQuatK();
           quatReal = myIMU.getQuatReal();
           quatRadianAccuracy = myIMU.getQuatRadianAccuracy();
+          //
+          classification = myIMU.getStabilityClassifier();
+
+         
+
         }
       //
     }
@@ -162,15 +170,23 @@ void loop()
   average = total / numReadings;
   Serial.print("average = ");
   Serial.println(average);
-Serial.print("I ");
-Serial.println(quatI, 2);
-Serial.print("J ");
-Serial.println(quatJ, 2);
-Serial.print("K ");
-Serial.println(quatK, 2);
-Serial.print("Real ");
-Serial.println(quatReal, 2);
-
+  Serial.print("I ");
+  Serial.println(quatI, 2);
+  Serial.print("J ");
+  Serial.println(quatJ, 2);
+  Serial.print("K ");
+  Serial.println(quatK, 2);
+  Serial.print("Real ");
+  Serial.println(quatReal, 2);
+  //
+  //stability checker
+  if(classification == 0) Serial.print(F("Unknown classification"));
+  else if(classification == 1) Serial.print(F("On table"));
+  else if(classification == 2) Serial.print(F("Stationary"));
+  else if(classification == 3) Serial.print(F("Stable"));
+  else if(classification == 4) Serial.print(F("Motion"));
+  else if(classification == 5) Serial.print(F("[Reserved]"));
+  Serial.println();
 
  
 if(writeStatus){
@@ -181,10 +197,16 @@ if(writeStatus){
 //        started=true;
 //       }
        
-//    
+//    distance
       Keyboard.print("D");
 //      Keyboard.print(measure.RangeMilliMeter);
       Keyboard.print(average);
+      Keyboard.print("N");
+      delay(keyDelay);//for stability
+      // rotation vector 
+      Keyboard.print("J");
+//    // maybe averge this ?
+      Keyboard.print(quatJ);
       Keyboard.print("N");
       delay(keyDelay);//for stability
     }

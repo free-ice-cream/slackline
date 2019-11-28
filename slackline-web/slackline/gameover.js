@@ -7,12 +7,12 @@ var gameover = {
       // flash.animations.add()
       //animations.add('start-hover', [ 1], 1, false);
     var newEnd = game.add.sprite(0, 0, 'anxEnd');
-    restartButt = game.add.sprite(386, 410, 'restart');
+    // restartButt = game.add.sprite(386, 410, 'restart');
     //
-    restartButt.inputEnabled = true;
-    restartButt.events.onInputDown.add(this.ressel, this);
-    restartButt.events.onInputOver.add(this.reshover, this);
-    restartButt.events.onInputOut.add(this.resout, this);
+    // restartButt.inputEnabled = true;
+    // restartButt.events.onInputDown.add(this.ressel, this);
+    // restartButt.events.onInputOver.add(this.reshover, this);
+    // restartButt.events.onInputOut.add(this.resout, this);
     //
 
     //
@@ -43,7 +43,7 @@ firstTime = Date.now();
   update: function() {
     secondTime = Date.now();
     diff = secondTime - firstTime;
-    if( diff >= screenTime ){
+    if( diff >= screenTime * 3 ){
       anxietyLevel = 0;
       game.state.start('intro1');
 

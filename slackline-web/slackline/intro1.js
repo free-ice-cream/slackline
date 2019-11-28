@@ -10,16 +10,29 @@ game.input.keyboard.addCallbacks(this, null, null, bounce);
 game.input.keyboard.addCallbacks(this, null, null, keyPress);
   },
   update: function(){
-    console.log("sensorI", sensorJ);
+    console.log("sensorJ", sensorJ);
+    // console.log("sensorK", sensorK);
     secondTime = Date.now();
     diff = secondTime - firstTime;
     if( diff >= screenTime ){
       game.state.start('intro2');
 
     }
-    if(sensorJ <= startLow || sensorJ >= startHigh){
-      game.state.start('play');
+
+
+    if(navigator.platform == "Win32"){
+      // console.log("succsess");
+      if(sensorJ >= triggerPosWin ){
+        game.state.start('play');
+      }
+    }else{
+      if(sensorJ <= triggerPos ){
+        game.state.start('play');
+      }
     }
+    // if(sensorJ >= triggerPos ){
+    //   game.state.start('play');
+    // }
   }
 
 }
@@ -48,7 +61,7 @@ function numberfy(sen) {
     stringJ = "";
   } else if (sen === "Q") {
     console.log("stringQ= ", stringQ);
-    sensorQ = parseFloat(stringQ);
+    sensorK = parseFloat(stringQ);
     stringQ = "";
   } else if (sen === "D") {
     console.log("stringD= ", stringD);
@@ -59,7 +72,7 @@ function numberfy(sen) {
   console.log("FLOATS");
   console.log(sensorI);
   console.log(sensorJ);
-  console.log(sensorQ);
+  console.log(sensorK);
 }
 
 function keyPress(char) {

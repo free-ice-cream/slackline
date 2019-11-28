@@ -77,10 +77,10 @@ var playState = {
       street2.y -= streetRate;
       if(street1.y > game.world.height){
 
-        street1.y= game.world.height * -1;
+        street1.y= (game.world.height * -1)+2;
       }
       if(street2.y > game.world.height){
-        street2.y= game.world.height * -1;
+        street2.y= (game.world.height * -1)+2;
       }
 
       for (let i = 0; i < yellowArray.length; i++) {
@@ -142,6 +142,43 @@ var playState = {
     game.physics.arcade.overlap(avatar, orangeGroup, orangeCrash, null, this);
 //
     this.checkThings();
+// a hacky windows work around :) - windows is not recognising the '-' symbol
+    if(navigator.platform == "Win32"){
+      // console.log("succsess");
+      if(sensorJ <= restPosWin){
+        // offRope = true;
+        console.log("OFF  ROPE");
+        this.checkRopeTime();
+      }else if(sensorJ >= triggerPosWin){
+        // offRope = false;
+        console.log("ON  ROPE");
+        ropeClock1 = Date.now();
+      }
+
+    }else{
+      if(sensorJ >= restPos){
+        // offRope = true;
+        console.log("OFF  ROPE");
+        this.checkRopeTime();
+      }else if(sensorJ <= triggerPos){
+        // offRope = false;
+        console.log("ON  ROPE");
+        ropeClock1 = Date.now();
+      }
+    }
+
+
+
+    if(sensorJ >= restPos){
+      // offRope = true;
+      console.log("OFF  ROPE");
+      this.checkRopeTime();
+    }else if(sensorJ <= triggerPos){
+      // offRope = false;
+      console.log("ON  ROPE");
+      ropeClock1 = Date.now();
+    }
+
 
   },
   checkThings: function() {
@@ -180,10 +217,20 @@ var playState = {
     greengauge.scale.setTo(1,sc);
     //
     // redgauge.alpha = (0.5 -sc) ;
-    console.log("redgauge.alpha  = ",redgauge.alpha );
-    console.log("sc = ",sc );
+    // console.log("redgauge.alpha  = ",redgauge.alpha );
+    // console.log("sc = ",sc );
     orangegauge.alpha = (1 -sc ) ;
     greengauge.alpha = (1 -(sc*1.5)) ;
+  },
+  checkRopeTime: function(){
+    // console.log("OFF  ROPE");
+    ropeClock2 = Date.now();
+    let ropeDiff = ropeClock2 - ropeClock1 ;
+    console.log(ropeDiff);
+    if(ropeClock2 - ropeClock1 >= maxOffRope ){
+      game.state.start('gameover');
+
+    }
   }
   // ---------------------------------------------------------------------------------------------------------------
   // ---------------------------------------------------------------------------------------------------------------
@@ -207,7 +254,7 @@ function numberfy(sen) {
     stringJ = "";
   } else if (sen === "Q") {
     console.log("stringQ= ", stringQ);
-    sensorQ = parseFloat(stringQ);
+    sensorK = parseFloat(stringQ);
     stringQ = "";
   } else if (sen === "D") {
     console.log("stringD= ", stringD);
@@ -218,7 +265,7 @@ function numberfy(sen) {
   console.log("FLOATS");
   console.log(sensorI);
   console.log(sensorJ);
-  console.log(sensorQ);
+  console.log(sensorK);
 }
 
 function keyPress(char) {
@@ -468,7 +515,7 @@ console.log("calibratedSensor called");
     //this is wrong :)
     // return screenWidth - rightPave -relativePosition;
   }else{
-    console.log("what the varuable batman!?");
+  //  console.log("what the varuable batman!?");
   }
 
 }

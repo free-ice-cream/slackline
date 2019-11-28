@@ -757,7 +757,7 @@ var toggleN = false;
   //
   var sensorI=0;
   var sensorJ=0;
-  var sensorQ=0;
+  var sensorK=0;
   var sensorD=0;
   //
   var groupSize = 5;
@@ -814,5 +814,16 @@ var outerLimit = 3000;
 var innerLimit = 250;
 //
 var sensorOrientation = "left";// set sensorOrientation to left or right to change which sidr the sensor is relative to the screen view
-var startLow = -0.02;
+var startLow = -0.02; //
 var startHigh = 0.02; // the activation threshold for the game
+var triggerPos = -0.03; // this is now the rest position
+var restPos = -0.02; // this is now the rest position
+
+var triggerPosWin = 0.03; // this is now the rest position
+var restPosWin = 0.02; // this is now the rest position
+
+//
+var maxOffRope = 4000; // max time off rope before reset
+var offRope = true;// a bool to check if the rope is active
+var ropeClock1;
+var ropeClock2;// apair of time holders to check hoe long a player has been off rope for

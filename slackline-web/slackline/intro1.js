@@ -10,7 +10,9 @@ game.input.keyboard.addCallbacks(this, null, null, bounce);
 game.input.keyboard.addCallbacks(this, null, null, keyPress);
   },
   update: function(){
-    console.log("sensorJ", sensorJ);
+    console.log("sensor  T", sensorT);
+
+    console.log("stringD  ==", stringD );
     // console.log("sensorK", sensorK);
     secondTime = Date.now();
     diff = secondTime - firstTime;
@@ -21,12 +23,12 @@ game.input.keyboard.addCallbacks(this, null, null, keyPress);
 
 
     if(navigator.platform == "Win32"){
-      // console.log("succsess");
-      if(sensorJ >= triggerPosWin ){
+       console.log("win");
+      if(sensorT > triggerPosWin ){
         game.state.start('play');
       }
     }else{
-      if(sensorJ <= triggerPos ){
+      if(sensorT > triggerPos ){
         game.state.start('play');
       }
     }
@@ -67,12 +69,17 @@ function numberfy(sen) {
     console.log("stringD= ", stringD);
     sensorD = parseFloat(stringD);
     stringD = "";
+  }else if (sen === "T") {
+    console.log("stringT= ", stringT);
+    sensorT = parseFloat(stringT);
+    stringT = "";
   }
+
   //
   console.log("FLOATS");
-  console.log(sensorI);
-  console.log(sensorJ);
-  console.log(sensorK);
+  // console.log(sensorI);
+  console.log("sensorT");
+  console.log(sensorT);
 }
 
 function keyPress(char) {
@@ -85,6 +92,7 @@ function keyPress(char) {
       toggleJ = false;
       toggleQ = false;
       toggleD = false;
+      toggleT = false;
       break;
     case "J":
       toggleJ = true;
@@ -92,6 +100,7 @@ function keyPress(char) {
       toggleI = false;
       toggleQ = false;
       toggleD = false;
+      toggleT = false;
       break;
     case "Q":
       toggleQ = true;
@@ -99,6 +108,7 @@ function keyPress(char) {
       toggleI = false;
       toggleJ = false;
       toggleD = false;
+      toggleT = false;
       break;
 
     case "D":
@@ -107,7 +117,24 @@ function keyPress(char) {
       toggleI = false;
       toggleJ = false;
       toggleQ = false;
+      toggleT = false;
       break;
+    case "T":
+      toggleT = true;
+        //
+      toggleD = false;
+      toggleI = false;
+      toggleJ = false;
+      toggleQ = false;
+      break;
+    // case "Z"://german keyboard hack
+    //     toggleY = true;
+    //       //
+    //     toggleD = false;
+    //     toggleI = false;
+    //     toggleJ = false;
+    //     toggleQ = false;
+    //     break;
     case "G":
     console.log("G bounce");
     bounce();
@@ -137,6 +164,12 @@ function keyPress(char) {
       if (toggleD) {
         stringD += char
       }
+      if (toggleT) {
+        stringT += char
+      }
+      // if (toggleZ) {
+      //   stringY += char
+      // }
       break;
 
     case "N":
@@ -153,6 +186,12 @@ function keyPress(char) {
       if (toggleD) {
         numberfy("D");
       }
+      if (toggleT) {
+        numberfy("T");
+      }
+      // if (toggleY) {
+      //   numberfy("Y");
+      // }
 
       break;
     default:

@@ -734,6 +734,8 @@ var toggleJ = false;
 var toggleQ = false;
 var toggleD = false;
 var toggleN = false;
+// var toggleY= false;//
+var toggleT= false; //hack for Y
 //
   var toggle0=false; //has 0 been pressed
   var toggle1=false; //has 0 been pressed
@@ -754,11 +756,15 @@ var toggleN = false;
   var stringJ ="";
   var stringQ ="";
   var stringD ="";
+  // var stringY ="";
+  var stringT ="";
   //
   var sensorI=0;
   var sensorJ=0;
   var sensorK=0;
   var sensorD=0;
+  // var sensorY=0;
+    var sensorT=0;
   //
   var groupSize = 5;
   var spread = -5;// how spread out are the others
@@ -813,14 +819,21 @@ var heartAttack = 100;
 var outerLimit = 3000;
 var innerLimit = 250;
 //
-var sensorOrientation = "left";// set sensorOrientation to left or right to change which sidr the sensor is relative to the screen view
+var sensorOrientation = "right";// set sensorOrientation to left or right to change which sidr the sensor is relative to the screen view
 var startLow = -0.02; //
 var startHigh = 0.02; // the activation threshold for the game
-var triggerPos = -0.03; // this is now the rest position
-var restPos = -0.02; // this is now the rest position
 
-var triggerPosWin = 0.03; // this is now the rest position
-var restPosWin = 0.02; // this is now the rest position
+//THESE ARE THE VALUES FOR THE sensorJ
+// var triggerPos = -0.03; // this is now the rest position
+// var restPos = -0.02; // this is now the rest position
+//
+// var triggerPosWin = 0.03; // this is now the rest position
+// var restPosWin = 0.02; // this is now the rest position
+var triggerPos = 0.15; // this is now the rest position
+var restPos = 0.00; // this is now the rest position
+
+var triggerPosWin = 0.15; // this is now the rest position
+var restPosWin = 0.00; // this is now the rest position
 
 //
 var maxOffRope = 4000; // max time off rope before reset

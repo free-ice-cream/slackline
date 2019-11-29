@@ -26,7 +26,7 @@ int innerLimit = 500;// inner maximum
 
 //
 //SMOOTHING
-const int numReadings = 10;     // default 10
+const int numReadings = 5;     // default 10
 int readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
 int total = 0;                  // the running total
@@ -49,6 +49,7 @@ byte classification;
 
 float yOffset = 0.07;//// eek this is hugeluyvariable!!!!
 float calY;
+bool calibrated = false;
 
 
 void setup()
@@ -132,6 +133,12 @@ void loop()
           x = myIMU.getAccelX();
           y = myIMU.getAccelY();
           z = myIMU.getAccelZ();
+          //
+          //calibrate teh sensor 
+          if(!calibrated){
+            yOffset = y;
+            calibrated=true;
+          }
 
          
 
@@ -225,23 +232,23 @@ if(writeStatus){
       Keyboard.print("D");
 //      Keyboard.print(measure.RangeMilliMeter);
       Keyboard.print(average);
-      Keyboard.print("N");
+      Keyboard.print("N ");
       delay(keyDelay);//for stability
       // rotation vector 
       Keyboard.print("J");
 //    // maybe averge this ?
       Keyboard.print(quatJ);
-      Keyboard.print("N");
-      delay(keyDelay);//for stability
-      Keyboard.print("Y"); // 
-//    // maybe averge this ?
-      Keyboard.print(calY);
-      Keyboard.print("N");
+      Keyboard.print("N ");
+//      delay(keyDelay);//for stability
+//      Keyboard.print("Y"); // 
+////    // maybe averge this ?
+//      Keyboard.print(calY);
+//      Keyboard.print("N");
        delay(keyDelay);//for stability
-      Keyboard.print("Z"); // german keyboard  :)
+      Keyboard.print("T"); // german keyboard hack  :)
 //    // maybe averge this ?
       Keyboard.print(calY);
-      Keyboard.print("N");
+      Keyboard.print("N ");
       delay(keyDelay);//for stability
       
     }

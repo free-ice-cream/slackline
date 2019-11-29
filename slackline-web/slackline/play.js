@@ -145,22 +145,22 @@ var playState = {
 // a hacky windows work around :) - windows is not recognising the '-' symbol
     if(navigator.platform == "Win32"){
       // console.log("succsess");
-      if(sensorJ <= restPosWin){
+      if(sensorT < triggerPosWin){
         // offRope = true;
         console.log("OFF  ROPE");
         this.checkRopeTime();
-      }else if(sensorJ >= triggerPosWin){
+      }else {
         // offRope = false;
         console.log("ON  ROPE");
         ropeClock1 = Date.now();
       }
 
     }else{
-      if(sensorJ >= restPos){
+      if(sensorT <triggerPos){
         // offRope = true;
         console.log("OFF  ROPE");
         this.checkRopeTime();
-      }else if(sensorJ <= triggerPos){
+      }else {
         // offRope = false;
         console.log("ON  ROPE");
         ropeClock1 = Date.now();
@@ -169,15 +169,15 @@ var playState = {
 
 
 
-    if(sensorJ >= restPos){
-      // offRope = true;
-      console.log("OFF  ROPE");
-      this.checkRopeTime();
-    }else if(sensorJ <= triggerPos){
-      // offRope = false;
-      console.log("ON  ROPE");
-      ropeClock1 = Date.now();
-    }
+    // if(sensorT < triggerPos{
+    //   // offRope = true;
+    //   console.log("OFF  ROPE");
+    //   this.checkRopeTime();
+    // }else if(sensorJ  triggerPos){
+    //   // offRope = false;
+    //   console.log("ON  ROPE");
+    //   ropeClock1 = Date.now();
+    // }
 
 
   },
@@ -241,6 +241,117 @@ var playState = {
 
 
 }
+//
+// function numberfy(sen) {
+//   console.log("STRINGS");
+//   if (sen === "I") {
+//     console.log("stringI= ", stringI);
+//     sensorI = parseFloat(stringI);
+//     stringI = "";
+//   } else if (sen === "J") {
+//     console.log("stringJ= ", stringJ);
+//     sensorJ = parseFloat(stringJ);
+//     stringJ = "";
+//   } else if (sen === "Q") {
+//     console.log("stringQ= ", stringQ);
+//     sensorK = parseFloat(stringQ);
+//     stringQ = "";
+//   } else if (sen === "D") {
+//     console.log("stringD= ", stringD);
+//     sensorD = parseFloat(stringD);
+//     stringD = "";
+//   }
+//   //
+//   console.log("FLOATS");
+//   console.log(sensorI);
+//   console.log(sensorJ);
+//   console.log(sensorK);
+// }
+//
+// function keyPress(char) {
+//   //console.log(char);
+//
+//   switch (char) {
+//     case "I":
+//       toggleI = true;
+//       //
+//       toggleJ = false;
+//       toggleQ = false;
+//       toggleD = false;
+//       break;
+//     case "J":
+//       toggleJ = true;
+//       //
+//       toggleI = false;
+//       toggleQ = false;
+//       toggleD = false;
+//       break;
+//     case "Q":
+//       toggleQ = true;
+//       //
+//       toggleI = false;
+//       toggleJ = false;
+//       toggleD = false;
+//       break;
+//
+//     case "D":
+//       toggleD = true;
+//       //
+//       toggleI = false;
+//       toggleJ = false;
+//       toggleQ = false;
+//       break;
+//
+//     case "0":
+//     case "1":
+//     case "2":
+//     case "3":
+//     case "4":
+//     case "5":
+//     case "6":
+//     case "7":
+//     case "8":
+//     case "9":
+//     case ".":
+//     case "-":
+//       if (toggleI) {
+//         stringI += char
+//       }
+//       if (toggleJ) {
+//         stringJ += char
+//       }
+//       if (toggleQ) {
+//         stringQ += char
+//       }
+//       if (toggleD) {
+//         stringD += char
+//       }
+//       break;
+//
+//     case "N":
+//       if (toggleI) {
+//         numberfy("I");
+//       }
+//       if (toggleJ) {
+//         numberfy("J");
+//       }
+//       if (toggleQ) {
+//         numberfy("Q");
+//       }
+//       if (toggleD) {
+//         numberfy("D");
+//       }
+//
+//       break;
+//     default:
+//       // code block
+//       //console.log("other key");
+//   }
+//
+//
+// }
+
+
 
 function numberfy(sen) {
   console.log("STRINGS");
@@ -248,6 +359,7 @@ function numberfy(sen) {
     console.log("stringI= ", stringI);
     sensorI = parseFloat(stringI);
     stringI = "";
+    // bounce(sensorI);
   } else if (sen === "J") {
     console.log("stringJ= ", stringJ);
     sensorJ = parseFloat(stringJ);
@@ -260,12 +372,18 @@ function numberfy(sen) {
     console.log("stringD= ", stringD);
     sensorD = parseFloat(stringD);
     stringD = "";
+  }else if (sen === "T") {
+    console.log("stringT= ", stringT);
+    sensorT = parseFloat(stringT);
+    stringT = "";
   }
+
   //
   console.log("FLOATS");
-  console.log(sensorI);
-  console.log(sensorJ);
-  console.log(sensorK);
+  // console.log(sensorI);
+  // console.log(sensorJ);
+  console.log("sensorT");
+  console.log(sensorT);
 }
 
 function keyPress(char) {
@@ -278,6 +396,7 @@ function keyPress(char) {
       toggleJ = false;
       toggleQ = false;
       toggleD = false;
+      toggleT = false;
       break;
     case "J":
       toggleJ = true;
@@ -285,6 +404,7 @@ function keyPress(char) {
       toggleI = false;
       toggleQ = false;
       toggleD = false;
+      toggleT = false;
       break;
     case "Q":
       toggleQ = true;
@@ -292,6 +412,7 @@ function keyPress(char) {
       toggleI = false;
       toggleJ = false;
       toggleD = false;
+      toggleT = false;
       break;
 
     case "D":
@@ -300,6 +421,26 @@ function keyPress(char) {
       toggleI = false;
       toggleJ = false;
       toggleQ = false;
+      toggleT = false;
+      break;
+    case "T":
+        toggleT = true;
+        toggleD = false;
+        toggleI = false;
+        toggleJ = false;
+        toggleQ = false;
+        break;
+      // case "Z"://german keyboard hack
+      //       toggleT = true;
+      //         //
+      //       toggleD = false;
+      //       toggleI = false;
+      //       toggleJ = false;
+      //       toggleQ = false;
+      //       break;
+    case "G":
+    console.log("G bounce");
+    bounce();
       break;
 
     case "0":
@@ -326,11 +467,18 @@ function keyPress(char) {
       if (toggleD) {
         stringD += char
       }
+      if (toggleT) {
+        stringT += char
+      }
+      // if (toggleZ) {
+      //   stringT += char
+      // }
       break;
 
     case "N":
       if (toggleI) {
         numberfy("I");
+
       }
       if (toggleJ) {
         numberfy("J");
@@ -341,6 +489,12 @@ function keyPress(char) {
       if (toggleD) {
         numberfy("D");
       }
+      if (toggleT) {
+        numberfy("T");
+      }
+      // if (toggleZ) {
+      //   numberfy("Y");
+      // }
 
       break;
     default:
@@ -350,6 +504,7 @@ function keyPress(char) {
 
 
 }
+
 
 function blueCrash(a, b) {
   console.log("blueCrash");
@@ -512,6 +667,11 @@ console.log("calibratedSensor called");
     return relativePosition + leftPave;
 
   }else if(sensorOrientation === "right"){
+
+    console.log("relativePosition + leftPave = ",relativePosition + leftPave);
+    return game.world.width - (relativePosition + leftPave);
+
+
     //this is wrong :)
     // return screenWidth - rightPave -relativePosition;
   }else{

@@ -225,23 +225,23 @@ if(writeStatus){
       Keyboard.print("D");
 //      Keyboard.print(measure.RangeMilliMeter);
       Keyboard.print(average);
-      Keyboard.print("N");
+      Keyboard.print("N ");
       delay(keyDelay);//for stability
       // rotation vector 
       Keyboard.print("J");
 //    // maybe averge this ?
       Keyboard.print(quatJ);
-      Keyboard.print("N");
-      delay(keyDelay);//for stability
-      Keyboard.print("Y"); // 
-//    // maybe averge this ?
-      Keyboard.print(calY);
-      Keyboard.print("N");
+      Keyboard.print("N ");
+//      delay(keyDelay);//for stability
+//      Keyboard.print("Y"); // 
+////    // maybe averge this ?
+//      Keyboard.print(calY);
+//      Keyboard.print("N");
        delay(keyDelay);//for stability
-      Keyboard.print("Z"); // german keyboard  :)
+      Keyboard.print("T"); // german keyboard hack  :)
 //    // maybe averge this ?
       Keyboard.print(calY);
-      Keyboard.print("N");
+      Keyboard.print("N ");
       delay(keyDelay);//for stability
       
     }

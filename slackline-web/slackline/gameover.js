@@ -43,7 +43,7 @@ firstTime = Date.now();
   update: function() {
     secondTime = Date.now();
     diff = secondTime - firstTime;
-    if( diff >= screenTime * 3 ){
+    if( diff >= screenTime * 2 ){
       anxietyLevel = 0;
       game.state.start('intro1');
 
